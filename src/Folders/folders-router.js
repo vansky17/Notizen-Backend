@@ -3,7 +3,7 @@ const express = require('express')
 const xss = require('xss')
 const logger = require('../logger')
 const FoldersService = require('./folders-service')
-const { isWebUri } = require('valid-url')
+
 
 const FolderRouter = express.Router()
 const bodyParser = express.json()
@@ -61,7 +61,7 @@ FolderRouter
     FoldersService.getById(req.app.get('db'), folder_id)
       .then(folder => {
         if (!folder) {
-          logger.error(`FOlder with id ${folder} not found.`)
+          logger.error(`Folder with id ${folder} not found.`)
           return res.status(404).json({
             error: { message: `Folder Not Found` }
           })
@@ -71,7 +71,6 @@ FolderRouter
         next()
       })
       .catch(next)
-
   })
 
   .get((req, res) => {
